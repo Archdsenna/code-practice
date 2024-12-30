@@ -1,0 +1,11 @@
+Rust编程相关内容
+
+rust工具
+ =============================================================================
+ -------------------------------------                    rustup
+ Note: rustup (toolchain manager)
+       rustup是Rust的安装和管理工具,安装和管理许多Rust       
+       工具链rustup将rustc, cargo, rustup和其他标准工具      
+       安装到Cargo的bin目录中。在Unix系统中, 它位于:         
+         $HOME/.cargo/bin,                                   
+       这个目录也是cargo install安装Rust程序和Cargo插件的目录

@@ -1,0 +1,7 @@
+[package]
+name = "guess_game"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies] # 工作原理：先更新crates.io,下载依赖->编译依赖->使用依赖编译项目
+rand = "0.8.3"  # 表示rand的版本不低于0.8.3
