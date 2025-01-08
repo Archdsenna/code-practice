@@ -6,13 +6,13 @@ struct User {
     sign_in_count: u64,
 }  // 结构体定义的结尾没有;号
 
-// 元组结构体
+// 元组结构体: 元组结构体具有命名的类型,但没有命名字段的结构体,其字段通过位置进行访问
 struct Color(i32, i32, i32); // 元组结构体的定义结尾有;号
 struct Point(i32, i32, i32);
 
 // 可以在函数体的最后一个表达式中构造一个结构体的新实例,来隐式的返回这个实例
 fn build_user(username: String, email: String) -> User {
-    User {
+    User {  // 隐式返回新实例
         // 如下两个字段可以使用 字段初始化简写语法进行简化
         // username: name,
         // email: email,
@@ -73,4 +73,5 @@ fn main() {
     let black = Color(0, 0, 0);
     let origin = Point(0, 0, 0);  // 注,black和origin值的类型不同,因为它们是不同的元组结构体的实例
                                   // 元组结构体成员的的访问使用.
+    println!("black0 is {}", black.0);   // 元组结构体通过位置进行访问
 }
