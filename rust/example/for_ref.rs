@@ -1,3 +1,8 @@
+// for word in words {
+//     if !key_add.contains(word) {  // rust要求控制流语句(如if)后必须跟一个代码块,即使只有一条语句也需要用{}括号包围
+//     }
+// }
+
 fn main() {
     let vec1 = vec![1, 2, 3];
     let vec2 = vec![1, 2, 3];
