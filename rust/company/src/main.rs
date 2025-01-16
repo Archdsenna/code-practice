@@ -42,6 +42,9 @@ fn main() {
         //          如果是 Err(E)，则会导致程序 panic，并显示错误信息。
         //      (2) 当用于 Option<T> 类型时，如果 Option 是 Some(T)，unwrap() 会返回 T；如果是 None，
         //          则同样会导致程序 panic，并显示一条默认的错误信息。
+        // 总结:
+        //      如果Result的值是成员Ok,unwrap()会返回Ok中的值。如果Result的值是成员Err,unwrap会为我们调用panic
+        //
         // 使用 unwrap() 的目的是为了简化错误处理：如果 flush() 成功，程序将继续执行；
         // 如果失败，程序将会 panic，并停止执行，同时提供错误信息。
         //
