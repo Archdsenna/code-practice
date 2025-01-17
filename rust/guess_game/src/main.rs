@@ -21,6 +21,27 @@ use rand::Rng; // 为什么要引入Rng？
                // 在 Rust 中，如果你想使用某个类型的方法，那么这个类型对应的 trait 必须在作用域中。即使 thread_rng() 返回的类型实现了 Rng trait，如果没有将 Rng trait 引入作用域，编译器不会允许你调用 gen_range 等 Rng trait 定义的方法。
                // 通过 use rand::Rng; 引入 Rng trait 后，你就可以在当前作用域内使用所有由 Rng 提供的方法
 
+struct Guess {
+    value: i32,
+}
+
+impl Guess {   // 定义结构体的方法
+    fn new(value: i32) -> Guess {   // 关联函数,new()通常称为构造函数
+        if value < 1 || value > 100 {
+            panic!("Guess value must be between 1 and 100, got {}.", value);
+        }
+
+        Guess { 
+            value    // 结构体字段初始化简写方法,如果字段名和变量名相同,则可以省略字段名和冒号,
+                     // 直接使用变量名作为字段值
+        }
+    }
+
+    fn value(&self) -> i32 {
+        self.value
+    }
+}
+
 fn main() {    // 使用fn定义一个函数
     println!("Guess the number!");
 
@@ -53,8 +74,12 @@ fn main() {    // 使用fn定义一个函数
         // rust变量遮蔽(Variable Shadowing): 结合 let mut guess = String::new()
         //  使用let关键字再次声明同名变量是一种变量遮蔽的特性,允许在相同的作用域内重新声明一个新的变量,
         //  使用相同的名称但可以拥有不同的类型或值, 广泛应用于类型转换或值的重新赋值
-        let guess: u32 = match guess.trim().parse() { // Rust编译器会根据这个类型注解尝试将字符串转换为u32类型
-            Ok(num) => num,   // match表达式每个分支的模式可以引入新的变量,这些变量是在模式匹配成功时创建和初始化的,
+        let guess: i32 = match guess.trim().parse() { // Rust编译器会根据这个类型注解尝试将字符串转换为u32类型
+            Ok(num) => {
+                let guess = Guess::new(num).value();
+                guess
+            },   
+                                // match表达式每个分支的模式可以引入新的变量,这些变量是在模式匹配成功时创建和初始化的,
                               // 这些变量的作用域仅限于相应的 match 分支
                               // 这是 Rust 语言模式匹配特性的一部分，允许直接从匹配的数据结构中提取值。
             Err(_) => continue, // _ 是一个通配符，表示我们不关心具体的错误信息
