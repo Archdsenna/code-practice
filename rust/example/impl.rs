@@ -33,3 +33,41 @@
 //              Point { x, y }
 //          }
 //      }
+// 3. 特征实现
+//      trait Printable {
+//          fn print(&self);
+//      }
+//
+//      impl<T> Printable for Point<T> where T: std::fmt::Display {
+//          fn print(&self) {
+//              println!("...")
+//          }
+//      }
+
+struct Point<T> {
+    x: T,
+    y: T,
+}
+
+// 为泛型Point实现方法
+// impl<T> Point<T> {          // 在impl后声明泛型T,这样Rust就知道Point的尖括号中的类型是泛型而不是具体类型了
+//     fn x(&self) -> &T {
+//         &self.x
+//     }
+// }
+
+// 为泛型Point<i32>实现方法, 而不是泛型Point
+impl Point<i32> {           // 如果不在impl后声明<T>,表示不涉及泛型
+    fn x(&self) -> &i32 {
+        &self.x
+    }
+}
+
+fn main() {
+    let p = Point {
+        x: 8,
+        y: 9,
+    };
+
+    println!("value of x: {}", p.x());
+}
