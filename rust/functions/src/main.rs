@@ -1,3 +1,20 @@
+// Rust中函数和方法是不同的概念:
+//  函数：独立的函数体，不属于任何类型,即不与任何类型关联
+//  方法: 属于某个类型, 在impl中实现
+//  关联函数: 属于某个类型, 在impl中实现
+//
+//  impl Point {
+//     // 关联函数，通常用作构造器, Result<T, E>类型的Ok和Err就是构造器
+//     fn new(x: i32, y: i32) -> Point {
+//         Point { x, y }
+//     }
+//
+//     // 实例方法，访问 self 来获取实例的数据
+//     fn distance_from_origin(&self) -> f64 {
+//         ((self.x.pow(2) + self.y.pow(2)) as f64).sqrt()
+//     }
+// }
+//
 // functions
 fn five() -> i32 {
     // 6就是一个表达式,简单理解为：表达式是值或者可以计算出值,而语句不会返回值
