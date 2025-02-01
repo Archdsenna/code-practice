@@ -56,7 +56,8 @@ struct Point<T> {
 //     }
 // }
 
-// 为泛型Point<i32>实现方法, 而不是泛型Point
+// 为泛型Point<i32>实现方法, 而不是泛型Point,其他T不是i32类型的Point<T>实例则没有此方法
+// 方法签名
 impl Point<i32> {           // 如果不在impl后声明<T>,表示不涉及泛型
     fn x(&self) -> &i32 {
         &self.x
@@ -70,4 +71,25 @@ fn main() {
     };
 
     println!("value of x: {}", p.x());
+
+    let p1 = PointA { x: 66, y: "hello" };
+    let p2 = PointA { x: 99, y: "world" };
+    let p3 = p1.mixup(p2);
+    println!("p3 value: {:#?}", p3);
+}
+
+#[derive(Debug)]    // 派生
+struct PointA<T, U> {
+    x: T,
+    y: U,
+}
+
+// 结构体方法签名中使用的泛型类型参数并不总是与结构体定义中的泛型类型参数相同
+impl<T, U> PointA<T, U> {
+    fn mixup<V, W>(self, other: PointA<V, W>) -> PointA<T, W> {
+        PointA {
+            x: self.x,
+            y: other.y,
+        }
+    }
 }
